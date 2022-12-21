@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +12,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "",
+      title: "Main Menu",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.grey),
       home: const AppHome(
@@ -31,6 +33,14 @@ class AppHome extends StatefulWidget {
 class _AppHomeState extends State<AppHome> {
   int counter = 0;
 
+  void _inc(bool a) {
+    setState(() {
+      print("asdfadsf");
+
+      counter += a ? (Random().nextInt(90)) : 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,16 +53,19 @@ class _AppHomeState extends State<AppHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Click to Add"),
-            Text('$counter', style: Theme.of(context).textTheme.headline1)
+            Text('$counter', style: Theme.of(context).textTheme.headline1),
+            ElevatedButton(
+                onPressed: () {
+                  _inc(true);
+                },
+                child: Text("Add"))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
           tooltip: "Add",
           onPressed: () {
-            setState(() {
-              counter++;
-            });
+            _inc(false);
           },
           child: const Icon(Icons.add)),
     );
