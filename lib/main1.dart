@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const App(title: "asdfdsaf"));
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({Key? key, title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +35,17 @@ class _AppHomeState extends State<AppHome> {
 
   void _inc(bool a) {
     setState(() {
-      print("asdfadsf");
-
       counter += a ? (Random().nextInt(90)) : 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final headline = Theme.of(context).textTheme.headline6;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Main Menu"),
+        title: Text(widget.title),
       ),
       backgroundColor: Colors.black26,
       body: Center(
@@ -58,7 +58,38 @@ class _AppHomeState extends State<AppHome> {
                 onPressed: () {
                   _inc(true);
                 },
-                child: Text("Add"))
+                child: Text("Add")),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(),
+                  Text(
+                    'Flutter is designed to use composition '
+                    'rather than inheritance, and a great way '
+                    'to see it in action is in build methods.',
+                    style: headline,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Instead of having every Widget inherit '
+                    'from a base class with all the necessary '
+                    'properties (like padding), Flutter uses '
+                    'individual classes.',
+                    style: headline,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Padding, for example, knows how to pad '
+                    'a child... and nothing else! ',
+                    style: headline,
+                  ),
+                  const Divider(),
+                ],
+              ),
+            )
           ],
         ),
       ),
